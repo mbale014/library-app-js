@@ -18,3 +18,4 @@ function addBookToLibrary(bookTitle, bookAuthor, bookYear, bookPages, bookHasSee
     let newBook = new Book(bookTitle, bookAuthor, bookYear, bookPages, bookHasSeen);
     myLibrary.push(newBook);
 }
+

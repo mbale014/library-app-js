@@ -1,4 +1,7 @@
-const myLibrary = [];
+const myLibrary = [
+  new Book('Animal farm', 'George Orwell', 1945, 141, true),
+  new Book('Bumi', 'Tere Liye', 2014, 440, true),
+];
 
 // Book object constructor
 function Book(title, author, year, pages, hasRead) {
@@ -10,6 +13,7 @@ function Book(title, author, year, pages, hasRead) {
     this.year = year;
     this.pages = pages;
     this.hasRead = hasRead;
+    this.UUID = crypto.randomUUID();
 
 }
 
@@ -19,3 +23,6 @@ function addBookToLibrary(bookTitle, bookAuthor, bookYear, bookPages, bookhasRea
     myLibrary.push(newBook);
 }
 
+myLibrary.forEach(book => {
+    
+})

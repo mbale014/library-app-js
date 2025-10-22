@@ -37,6 +37,35 @@
             <div class="cards">
                 
             </div>
+            <dialog>
+                <form action="post" method="dialog">
+                    <div class="form-row">
+                        <label for="book-title">Title</label>
+                        <input type="text" name="title" id="book-title">
+                    </div>
+                    <div class="form-row">
+                        <label for="book-author">Author</label>
+                        <input type="text" name="author" id="book-author">
+                    </div>
+                    <div class="form-row">
+                        <label for="book-year">Year</label>
+                        <input type="tel" name="year" id="book-year">
+                    </div>
+                    <div class="form-row">
+                        <label for="book-pages">Pages</label>
+                        <input type="tel" name="pages" id="book-pages">
+                    </div>
+                    <div class="form-row">
+                        <label for="book-hasRead">Completed</label>
+                        <input type="checkbox" id="book-hasRead" name="hasRead">
+                    </div>
+                    <div class="button-dialog">
+                        <button value="cancel" formmethod="dialog">Cancel</button>
+                        <button id="confirmBtn" value="default" type="submit">Confirm</button>
+                    </div>
+                </form>
+            </dialog>
+            <button>New Book</button>
         </div>
     </div>
     

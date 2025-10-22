@@ -2,6 +2,9 @@ const myLibrary = [];
 
 // Book object constructor
 function Book(title, author, year, pages, hasSeen) {
+    if (!new.target) {
+        throw Error("You must use the 'new' operator to call the constructor");
+    };
     this.title = title;
     this.author = author;
     this.year = year;

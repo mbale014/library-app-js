@@ -25,7 +25,9 @@ function addBookToLibrary(bookTitle, bookAuthor, bookYear, bookPages, bookhasRea
 
 const cards = document.querySelector('.cards');
 
-myLibrary.forEach(book => {
+// function to loop through array books then display on card
+function displayBook(myLib) {
+    myLib.forEach(book => {
     const card = document.createElement('div');
     const title = document.createElement('h3');
     const author = document.createElement('p');
@@ -48,3 +50,6 @@ myLibrary.forEach(book => {
     cards.appendChild(card)
     
 })
+};
+
+displayBook(myLibrary)

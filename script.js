@@ -44,6 +44,7 @@ function displayBook(myLib) {
         const year = document.createElement('p');
         const pages = document.createElement('p');
         const reading = document.createElement('p');
+        const delBtn = document.createElement('button');
         const statusReading = book.hasRead ? 'Completed' : 'Reading';
 
         title.innerText = `${book.title}`;
@@ -51,13 +52,15 @@ function displayBook(myLib) {
         year.innerText = `Year: ${book.year}`;
         pages.innerText = `${book.pages} pages`;
         reading.innerText = `${statusReading}`;
-        card.setAttribute('data-UUID', book.UUID)
+        card.setAttribute('data-UUID', book.UUID);
+        delBtn.innerText = 'Remove book'
 
         card.appendChild(title);
         card.appendChild(author);
         card.appendChild(year);
         card.appendChild(pages);
         card.appendChild(reading);
+        card.appendChild(delBtn);
         cards.appendChild(card)
 
 })
@@ -96,3 +99,5 @@ confirmBtn.addEventListener('click', (event) => {
 
 
 displayBook(myLibrary);
+
+// "Delete" button to deletes book object  

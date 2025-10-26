@@ -25,6 +25,16 @@ function addBookToLibrary(bookTitle, bookAuthor, bookYear, bookPages, bookhasRea
 
 const cards = document.querySelector('.cards');
 
+// function to check if book already displayed or not by compare UUID on script and dom
+// function checkBookExist(myBook) {
+//     const displayedBook = cards.querySelectorAll('div > p:last-child');
+//     displayedBook.forEach(item => {
+//         if (item.textContent === myBook.UUID) {
+//             return 'exist';
+//         }
+// });
+// }
+
 // function to loop through array books then display on card
 function displayBook(myLib) {
     myLib.forEach(book => {
@@ -45,7 +55,6 @@ function displayBook(myLib) {
         bookUUID.innerText = book.UUID;
         bookUUID.hidden = true;
 
-
         card.appendChild(title);
         card.appendChild(author);
         card.appendChild(year);
@@ -53,7 +62,7 @@ function displayBook(myLib) {
         card.appendChild(reading);
         card.appendChild(bookUUID);
         cards.appendChild(card)
-    
+
 })
 };
 
@@ -79,8 +88,11 @@ confirmBtn.addEventListener('click', (event) => {
     const pagesValue = parseInt(inputForm[3].value);
     const hasReadValue = inputForm[4].checked;
 
+    const bookNew = [new Book(titleValue, authorValue, yearValue , pagesValue, hasReadValue)];
+
     addBookToLibrary(titleValue, authorValue, yearValue , pagesValue, hasReadValue);
 
+    displayBook(bookNew);
     formInsideDialog.reset();
     dialog.close();
 })

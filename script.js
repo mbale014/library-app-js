@@ -54,14 +54,40 @@ function displayBook(myLib) {
 
 displayBook(myLibrary);
 
-const newBookBtn = document.querySelector('dialog + button');
-const dialog = document.querySelector('dialog');
+const newBookBtn = document.querySelector('#new-book-btn');
+const dialog = document.querySelector('#new-book-dialog');
 const closeBtn = document.querySelector('form button');
+const confirmBtn = dialog.querySelector('#confirmBtn');
+const inputForm = dialog.querySelectorAll('.form-row input');
+const outputBoxTest = document.querySelector('dialog + p + p')
 
+
+// "Show the new book dialog form" button opens the <dialog> modally
 newBookBtn.addEventListener('click', () => {
     dialog.showModal();
+});
+
+// "Cancel" button closes the dialog without submitting because of [formmethod="dialog"], triggering a close event
+dialog.addEventListener('close', (e) => {
+    outputBoxTest.value = 
+        dialog.returnValue === 'default' 
+            ? 'No return value' 
+            : `ReturnValue: ${dialog.returnValue}.` // Have to check for 'default' rather than empty string
+
+});
+
+confirmBtn.addEventListener('click', (e) => {
+    e.preventDefault(); // We dont want to submit this fake form
+
+    const titleValue = inputForm[0].value;
+    const authorValue = inputForm[1].value;
+    const yearValue = inputForm[2].value;
+    const pagesValue = inputForm[3].value;
+    const hasReadValue = inputForm[4].checked ? 'Completed' : 'Reading';
+
+    addBookToLibrary(titleValue, authorValue, yearValue , pagesValue, hasReadValue);
+
+    dialog.close();
 })
 
-closeBtn.addEventListener('click', ()=> {
-    dialog.closest();
-})
+

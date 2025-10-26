@@ -28,38 +28,41 @@ const cards = document.querySelector('.cards');
 // function to loop through array books then display on card
 function displayBook(myLib) {
     myLib.forEach(book => {
-    const card = document.createElement('div');
-    const title = document.createElement('h3');
-    const author = document.createElement('p');
-    const year = document.createElement('p');
-    const pages = document.createElement('p');
-    const reading = document.createElement('p');
-    const statusReading = book.hasRead ? 'Completed' : 'Reading';
+        const card = document.createElement('div');
+        const title = document.createElement('h3');
+        const author = document.createElement('p');
+        const year = document.createElement('p');
+        const pages = document.createElement('p');
+        const reading = document.createElement('p');
+        const bookUUID = document.createElement('p');
+        const statusReading = book.hasRead ? 'Completed' : 'Reading';
 
-    title.innerText = `${book.title}`;
-    author.innerText = `Author: ${book.author}`;
-    year.innerText = `Year: ${book.year}`;
-    pages.innerText = `${book.pages} pages`;
-    reading.innerText = `${statusReading}`
+        title.innerText = `${book.title}`;
+        author.innerText = `Author: ${book.author}`;
+        year.innerText = `Year: ${book.year}`;
+        pages.innerText = `${book.pages} pages`;
+        reading.innerText = `${statusReading}`;
+        bookUUID.innerText = book.UUID;
+        bookUUID.hidden = true;
 
-    card.appendChild(title);
-    card.appendChild(author);
-    card.appendChild(year);
-    card.appendChild(pages);
-    card.appendChild(reading);
-    cards.appendChild(card)
+
+        card.appendChild(title);
+        card.appendChild(author);
+        card.appendChild(year);
+        card.appendChild(pages);
+        card.appendChild(reading);
+        card.appendChild(bookUUID);
+        cards.appendChild(card)
     
 })
 };
-
-displayBook(myLibrary);
 
 const newBookBtn = document.querySelector('#new-book-btn');
 const dialog = document.querySelector('#new-book-dialog');
 const closeBtn = document.querySelector('form button');
 const confirmBtn = dialog.querySelector('#confirmBtn');
+const formInsideDialog = dialog.querySelector('form');
 const inputForm = dialog.querySelectorAll('.form-row input');
-const outputBoxTest = document.querySelector('dialog + p + p')
 
 
 // "Show the new book dialog form" button opens the <dialog> modally
@@ -67,27 +70,20 @@ newBookBtn.addEventListener('click', () => {
     dialog.showModal();
 });
 
-// "Cancel" button closes the dialog without submitting because of [formmethod="dialog"], triggering a close event
-dialog.addEventListener('close', (e) => {
-    outputBoxTest.value = 
-        dialog.returnValue === 'default' 
-            ? 'No return value' 
-            : `ReturnValue: ${dialog.returnValue}.` // Have to check for 'default' rather than empty string
-
-});
-
-confirmBtn.addEventListener('click', (e) => {
-    e.preventDefault(); // We dont want to submit this fake form
+confirmBtn.addEventListener('click', (event) => {
+    event.preventDefault(); // We dont want to submit this fake form
 
     const titleValue = inputForm[0].value;
     const authorValue = inputForm[1].value;
-    const yearValue = inputForm[2].value;
-    const pagesValue = inputForm[3].value;
-    const hasReadValue = inputForm[4].checked ? 'Completed' : 'Reading';
+    const yearValue = parseInt(inputForm[2].value);
+    const pagesValue = parseInt(inputForm[3].value);
+    const hasReadValue = inputForm[4].checked;
 
     addBookToLibrary(titleValue, authorValue, yearValue , pagesValue, hasReadValue);
 
+    formInsideDialog.reset();
     dialog.close();
 })
 
 
+displayBook(myLibrary);

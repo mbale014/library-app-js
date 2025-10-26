@@ -44,7 +44,6 @@ function displayBook(myLib) {
         const year = document.createElement('p');
         const pages = document.createElement('p');
         const reading = document.createElement('p');
-        const bookUUID = document.createElement('p');
         const statusReading = book.hasRead ? 'Completed' : 'Reading';
 
         title.innerText = `${book.title}`;
@@ -52,15 +51,13 @@ function displayBook(myLib) {
         year.innerText = `Year: ${book.year}`;
         pages.innerText = `${book.pages} pages`;
         reading.innerText = `${statusReading}`;
-        bookUUID.innerText = book.UUID;
-        bookUUID.hidden = true;
+        card.setAttribute('data-UUID', book.UUID)
 
         card.appendChild(title);
         card.appendChild(author);
         card.appendChild(year);
         card.appendChild(pages);
         card.appendChild(reading);
-        card.appendChild(bookUUID);
         cards.appendChild(card)
 
 })

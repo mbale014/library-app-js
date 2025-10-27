@@ -40,9 +40,9 @@ function displayBook(myLib) {
         const statusReading = book.hasRead ? 'Completed' : 'Reading';
 
         title.innerText = `${book.title}`;
-        author.innerText = `Author: ${book.author}`;
-        year.innerText = `Year: ${book.year}`;
-        pages.innerText = `${book.pages} pages`;
+        author.innerText = (book.author === "") ? 'Author: -' : `Author: ${book.author}`;
+        year.innerText = (Number.isNaN(book.year)) ? 'Year: -': `Year: ${book.year}`;
+        pages.innerText = (Number.isNaN(book.pages)) ? '- Pages' : `${book.pages} pages`;
         reading.innerText = `Status: ${statusReading}`;
         card.classList.add('card');
         card.setAttribute('data-UUID', book.UUID);
@@ -83,6 +83,13 @@ confirmBtn.addEventListener('click', (event) => {
     const yearValue = parseInt(inputForm[2].value);
     const pagesValue = parseInt(inputForm[3].value);
     const hasReadValue = inputForm[4].checked;
+
+    // form validation
+    const isValid = formInsideDialog.checkValidity();
+    if (!isValid) {
+        formInsideDialog.reportValidity();
+        return;
+    }
 
     const bookNew = [new Book(titleValue, authorValue, yearValue , pagesValue, hasReadValue)];
 
@@ -143,4 +150,5 @@ function changeStatus(e) {
 
 };
 
-cards.addEventListener('click', changeStatus)
+cards.addEventListener('click', changeStatus);
+

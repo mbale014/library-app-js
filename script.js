@@ -53,7 +53,8 @@ function displayBook(myLib) {
         pages.innerText = `${book.pages} pages`;
         reading.innerText = `${statusReading}`;
         card.setAttribute('data-UUID', book.UUID);
-        delBtn.innerText = 'Remove book'
+        delBtn.innerText = 'Remove book';
+        delBtn.classList.toggle('del-book-btn')
 
         card.appendChild(title);
         card.appendChild(author);
@@ -100,4 +101,14 @@ confirmBtn.addEventListener('click', (event) => {
 
 displayBook(myLibrary);
 
-// "Delete" button to deletes book object  
+const delBookBtn = cards.querySelectorAll('div > button');
+
+// "Delete" button to deletes book from object and dom
+delBookBtn.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+        const currBookDomUUID = e.target.parentNode.dataset.uuid;
+        const currObjIdx = myLibrary.findIndex(item => item.UUID === currBookDomUUID);
+        myLibrary.splice(currObjIdx, 1); //remove book from object
+        e.target.parentElement.remove(); //remove book from dom
+    })
+})

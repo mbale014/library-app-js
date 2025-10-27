@@ -46,23 +46,27 @@ function displayBook(myLib) {
         const pages = document.createElement('p');
         const reading = document.createElement('p');
         const delBtn = document.createElement('button');
+        const statusToggleBtn = document.createElement('button');
         const statusReading = book.hasRead ? 'Completed' : 'Reading';
 
         title.innerText = `${book.title}`;
         author.innerText = `Author: ${book.author}`;
         year.innerText = `Year: ${book.year}`;
         pages.innerText = `${book.pages} pages`;
-        reading.innerText = `${statusReading}`;
+        reading.innerText = `Status: ${statusReading}`;
         card.classList.add('card');
         card.setAttribute('data-UUID', book.UUID);
         delBtn.innerText = 'Remove book';
-        delBtn.classList.toggle('del-book-btn')
+        delBtn.classList.toggle('del-book-btn');
+        statusToggleBtn.innerText = 'Change status';
+        statusToggleBtn.classList.toggle('status-toggle-btn')
 
         card.appendChild(title);
         card.appendChild(author);
         card.appendChild(year);
         card.appendChild(pages);
         card.appendChild(reading);
+        card.appendChild(statusToggleBtn);
         card.appendChild(delBtn);
         cards.appendChild(card)
 

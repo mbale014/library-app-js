@@ -18,9 +18,10 @@ function Book(title, author, year, pages, hasRead) {
 }
 
 // Add book to library function
-function addBookToLibrary(bookTitle, bookAuthor, bookYear, bookPages, bookhasRead) {
-    let newBook = new Book(bookTitle, bookAuthor, bookYear, bookPages, bookhasRead);
-    myLibrary.push(newBook);
+function addBookToLibrary(bookList) {
+    for (let item of bookList) {
+        myLibrary.push(item);
+    }
 }
 
 const cards = document.querySelector('.cards');
@@ -52,6 +53,7 @@ function displayBook(myLib) {
         year.innerText = `Year: ${book.year}`;
         pages.innerText = `${book.pages} pages`;
         reading.innerText = `${statusReading}`;
+        card.classList.add('card');
         card.setAttribute('data-UUID', book.UUID);
         delBtn.innerText = 'Remove book';
         delBtn.classList.toggle('del-book-btn')
@@ -66,6 +68,7 @@ function displayBook(myLib) {
 
 })
 };
+
 
 const newBookBtn = document.querySelector('#new-book-btn');
 const dialog = document.querySelector('#new-book-dialog');
@@ -91,24 +94,29 @@ confirmBtn.addEventListener('click', (event) => {
 
     const bookNew = [new Book(titleValue, authorValue, yearValue , pagesValue, hasReadValue)];
 
-    addBookToLibrary(titleValue, authorValue, yearValue , pagesValue, hasReadValue);
+    addBookToLibrary(bookNew);
 
     displayBook(bookNew);
     formInsideDialog.reset();
     dialog.close();
 })
 
-
 displayBook(myLibrary);
 
-const delBookBtn = cards.querySelectorAll('div > button');
+cards.addEventListener('click', (e) => {
+    if (!e.target.classList.contains('del-book-btn')) return;
 
-// "Delete" button to deletes book from object and dom
-delBookBtn.forEach(btn => {
-    btn.addEventListener('click', (e) => {
-        const currBookDomUUID = e.target.parentNode.dataset.uuid;
-        const currObjIdx = myLibrary.findIndex(item => item.UUID === currBookDomUUID);
-        myLibrary.splice(currObjIdx, 1); //remove book from object
-        e.target.parentElement.remove(); //remove book from dom
-    })
-})
+    const currCardElement = e.target.closest('.card');
+    if (!currCardElement) return;
+
+    const currCardUUID = currCardElement.dataset.uuid;
+    const objBookIdx = myLibrary.findIndex(item => item.UUID === currCardUUID);
+    
+    // remove from array myLibrary
+    if (objBookIdx !== -1) {
+        myLibrary.splice(objBookIdx, 1)
+    }
+    // remove from dom
+    currCardElement.remove();
+});
+

@@ -26,16 +26,6 @@ function addBookToLibrary(bookList) {
 
 const cards = document.querySelector('.cards');
 
-// function to check if book already displayed or not by compare UUID on script and dom
-// function checkBookExist(myBook) {
-//     const displayedBook = cards.querySelectorAll('div > p:last-child');
-//     displayedBook.forEach(item => {
-//         if (item.textContent === myBook.UUID) {
-//             return 'exist';
-//         }
-// });
-// }
-
 // function to loop through array books then display on card
 function displayBook(myLib) {
     myLib.forEach(book => {
@@ -69,7 +59,6 @@ function displayBook(myLib) {
         card.appendChild(statusToggleBtn);
         card.appendChild(delBtn);
         cards.appendChild(card)
-
 })
 };
 
@@ -80,7 +69,6 @@ const closeBtn = document.querySelector('form button');
 const confirmBtn = dialog.querySelector('#confirmBtn');
 const formInsideDialog = dialog.querySelector('form');
 const inputForm = dialog.querySelectorAll('.form-row input');
-
 
 // "Show the new book dialog form" button opens the <dialog> modally
 newBookBtn.addEventListener('click', () => {
@@ -107,20 +95,52 @@ confirmBtn.addEventListener('click', (event) => {
 
 displayBook(myLibrary);
 
+// function to get book obj index and dom element by getting their uuid
+function getBookDomAndObj(e) {
+    const cardElement = e.target.closest('.card');
+    if (!cardElement) return;
+
+    const cardUUID = cardElement.dataset.uuid;
+    const objBookIdx = myLibrary.findIndex(item => item.UUID === cardUUID);
+    return [cardElement, objBookIdx];
+}
+
+// Remove book function for each card
 cards.addEventListener('click', (e) => {
     if (!e.target.classList.contains('del-book-btn')) return;
 
-    const currCardElement = e.target.closest('.card');
-    if (!currCardElement) return;
-
-    const currCardUUID = currCardElement.dataset.uuid;
-    const objBookIdx = myLibrary.findIndex(item => item.UUID === currCardUUID);
+    const [cardElement, objBookIdx] = getBookDomAndObj(e);
     
     // remove from array myLibrary
     if (objBookIdx !== -1) {
         myLibrary.splice(objBookIdx, 1)
     }
+
     // remove from dom
-    currCardElement.remove();
+    cardElement.remove();
 });
 
+// Book prototype change status function to toggle reading status
+Book.prototype.changeStatus = function() {
+    this.hasRead = !this.hasRead;
+};
+
+// change reading status for each card
+function changeStatus(e) {
+    if (!e.target.classList.contains('status-toggle-btn')) return;
+
+   const [cardElement, objBookIdx] = getBookDomAndObj(e);
+
+   if (objBookIdx !== -1) {
+    myLibrary[objBookIdx].changeStatus();
+   }
+
+   if (myLibrary[objBookIdx].hasRead === true) {
+    cardElement.childNodes[4].innerText = 'Status: Completed';
+   } else {
+    cardElement.childNodes[4].innerText = 'Status: Reading'
+   }
+
+};
+
+cards.addEventListener('click', changeStatus)

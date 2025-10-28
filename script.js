@@ -155,3 +155,10 @@ function changeStatus(e) {
 };
 
 cards.addEventListener('click', changeStatus);
+
+// Project credit
+const supportIcon = document.querySelector('#support-logo');
+supportIcon.addEventListener('click', () => {
+    alert('Made by M. Iqbal -- @ odin project library app');
+    window.open('https://github.com/mbale014', '_blank');
+})

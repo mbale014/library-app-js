@@ -175,6 +175,7 @@ button[id*='logo']:hover svg {
 #new-book-btn {
   position:absolute;
   right: 4em;
+  top: 2.5em;
 
   font-size: 1rem;
   background-color: var(--secondary-color);
@@ -200,7 +201,7 @@ button[id*='logo']:hover svg {
 .cards {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
-  gap: 4em;
+  gap: 3em;
 
   color: var(--black)
 

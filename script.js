@@ -1,6 +1,9 @@
 const myLibrary = [
   new Book('Animal farm', 'George Orwell', 1945, 141, true),
   new Book('Bumi', 'Tere Liye', 2014, 440, true),
+  new Book('Filosofi teras', 'Henry Manampiring', 2018, 344, true),
+  new Book('Shōgun saga', 'James Clavell', 1975, 1152, true),
+  new Book('The Poppy war #1-3', 'R.F. Kuang', 2021, NaN, false),
 ];
 
 // Book object constructor

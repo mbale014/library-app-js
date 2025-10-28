@@ -262,7 +262,67 @@ button[id*='logo']:hover svg {
   color: var(--black);
 }
 
+::backdrop {
+  background-color: #1E211A;
+  opacity: 0.75;
+}
 
+#new-book-dialog {
+  margin: auto;
+  border: none;
+  border-radius: var(--border-radius);
+
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  min-height: 100%;
+  padding: 1.3em;
+
+}
+
+.form-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-bottom: 1.2em;
+}
+
+.form-row input {
+  padding: 2px 8px;
+  border: none;
+  border-bottom: 1px solid;
+
+}
+
+.form-row input:focus {
+  border-radius: var(--border-radius);
+}
+
+.form-row label {
+  display: inline-block;
+  width: 4em;
+}
+
+.form-row:nth-child(5) label {
+  width: 6em;
+}
+
+.button-dialog button {
+  border: none;
+  border-radius: var(--border-radius);
+  padding: 4px 8px;
+  background-color: var(--secondary-color);
+  margin-right: 1em;
+}
+
+.button-dialog button:hover {
+  cursor: pointer;
+  background-color: #7aaab3;
+}
 
 
 

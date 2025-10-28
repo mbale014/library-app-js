@@ -46,7 +46,7 @@ function displayBook(myLib) {
         reading.innerText = `Status: ${statusReading}`;
         card.classList.add('card');
         card.setAttribute('data-UUID', book.UUID);
-        delBtn.innerText = 'Remove book';
+        delBtn.innerText = 'Remove';
         delBtn.classList.toggle('del-book-btn');
         statusToggleBtn.innerText = 'Change status';
         statusToggleBtn.classList.toggle('status-toggle-btn')

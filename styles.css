@@ -60,11 +60,15 @@ h1, h2, h3, h4, h5, h6 {
   --primary-color: #ABE7B2;
   --secondary-color: #93BFC7;
   --black: #1E211A;
+  --border-radius: 5px;
 
   font-size: 16px;
+
 }
 
 .container {
+  --logo-hover-color:rgb(229, 231, 224);
+
   min-height: 100vh;
   display: grid;
   grid-template-columns: 1fr 12fr;
@@ -73,8 +77,45 @@ h1, h2, h3, h4, h5, h6 {
 
 .header {
   background-color: var(--background-color);
-  grid-column: 2
+  color:var(--black);
+  padding: 0 4em;
+  
+  grid-column: 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  -webkit-box-shadow: 0 4px 6px -6px #222;
+  -moz-box-shadow: 0 4px 6px -6px #222;
+  box-shadow: 0 4px 6px -6px #222;
 }
+
+.search-bar,
+.user-profile {
+  --logo-hover-color: rgb(235, 95, 52);
+
+  display: flex;
+  align-items: center;
+  gap: 1em;
+}
+
+#search-input {
+  border-radius: var(--border-radius);
+  border: none;
+  width: 30em;
+  font-size: 1.5rem;
+  padding: 0.6em 1em;
+}
+
+.header img {
+  width: 50px;
+}
+
+.search-bar svg {
+  width: 45px;
+  height: 45px
+}
+
 
 .sidebar {
   --logo-width: 3.5em;
@@ -97,6 +138,11 @@ h1, h2, h3, h4, h5, h6 {
   gap: 1.5em
 }
 
+button[id*='logo'] {
+  background-color: transparent;
+  border: none;
+}
+
 button[id*='logo'] svg {
   fill: var(--black);
   stroke-width: 1px;
@@ -104,12 +150,9 @@ button[id*='logo'] svg {
 }
 
 button[id*='logo']:hover svg {
-  fill: rgb(229, 231, 224);
+  fill: var(--logo-hover-color);
   cursor: pointer;
 }
 
-button[id*='logo'] {
-  background-color: transparent;
-  border: none;
-}
+
 

@@ -59,6 +59,7 @@ h1, h2, h3, h4, h5, h6 {
   --foreground-color: #CBF3BB;
   --primary-color: #ABE7B2;
   --secondary-color: #93BFC7;
+  --black: #1E211A;
 
   font-size: 16px;
 }
@@ -66,7 +67,7 @@ h1, h2, h3, h4, h5, h6 {
 .container {
   min-height: 100vh;
   display: grid;
-  grid-template-columns: 1fr 10fr;
+  grid-template-columns: 1fr 12fr;
   grid-template-rows: 1fr 4fr;
 }
 
@@ -76,6 +77,39 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .sidebar {
-  background-color: var(--primary-color);
-  grid-row: 1/ span 2
+  --logo-width: 3.5em;
+
+  background-color: var(--secondary-color);
+  grid-row: 1/ span 2;
+  display:flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: center;
+  padding: 2em 0;
+  min-width: 60px;
 }
+
+.nav-sidebar {
+  --logo-width: 2.5em;
+
+  display: flex;
+  flex-direction: column;
+  gap: 1.5em
+}
+
+button[id*='logo'] svg {
+  fill: var(--black);
+  stroke-width: 1px;
+  width: var(--logo-width);
+}
+
+button[id*='logo']:hover svg {
+  fill: rgb(229, 231, 224);
+  cursor: pointer;
+}
+
+button[id*='logo'] {
+  background-color: transparent;
+  border: none;
+}
+

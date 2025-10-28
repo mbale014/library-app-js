@@ -175,6 +175,26 @@ button[id*='logo']:hover svg {
 #new-book-btn {
   position:absolute;
   right: 4em;
+
+  font-size: 1rem;
+  background-color: var(--secondary-color);
+  border: none;
+  border-radius: var(--border-radius);
+  padding: 10px 40px;
+}
+
+#new-book-btn:hover {
+  cursor: pointer;
+  background-color: #add2d8;
+}
+
+#new-book-btn:active {
+  background-color: #7aaab3;
+}
+
+#new-book-btn::before {
+  content: '+';
+  color:var(--background-color)
 }
 
 .cards {

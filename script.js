@@ -116,15 +116,19 @@ function getBookDomAndObj(e) {
 cards.addEventListener('click', (e) => {
     if (!e.target.classList.contains('del-book-btn')) return;
 
-    const [cardElement, objBookIdx] = getBookDomAndObj(e);
+    // Display confirmation windows
+    if (confirm("Are you sure you want to remove book?")) {
+         const [cardElement, objBookIdx] = getBookDomAndObj(e);
     
-    // remove from array myLibrary
-    if (objBookIdx !== -1) {
-        myLibrary.splice(objBookIdx, 1)
-    }
+        // remove from array myLibrary
+        if (objBookIdx !== -1) {
+            myLibrary.splice(objBookIdx, 1)
+        }
 
-    // remove from dom
-    cardElement.remove();
+        // remove from dom
+        cardElement.remove();
+    };
+
 });
 
 // Book prototype change status function to toggle reading status
@@ -151,4 +155,3 @@ function changeStatus(e) {
 };
 
 cards.addEventListener('click', changeStatus);
-

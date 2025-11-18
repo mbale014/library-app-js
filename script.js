@@ -1,3 +1,22 @@
+// Book object constructor
+class Book {
+
+    constructor(title, author, year, pages, hasRead) {
+        this.title = title;
+        this.author = author;
+        this.year = year;
+        this.pages = pages;
+        this.hasRead = hasRead;
+        this.UUID = crypto.randomUUID(); //This generate different random UUID 
+    }
+
+    // Method to change reading status of the book
+    changeStatus() {
+        this.hasRead = !this.hasRead;
+    };
+};
+
+// All Book object will be saved in a list
 const myLibrary = [
   new Book('Animal farm', 'George Orwell', 1945, 141, true),
   new Book('Bumi', 'Tere Liye', 2014, 440, true),
@@ -5,20 +24,6 @@ const myLibrary = [
   new Book('Shōgun saga', 'James Clavell', 1975, 1152, true),
   new Book('The Poppy war #1-3', 'R.F. Kuang', 2021, NaN, false),
 ];
-
-// Book object constructor
-function Book(title, author, year, pages, hasRead) {
-    if (!new.target) {
-        throw Error("You must use the 'new' operator to call the constructor");
-    };
-    this.title = title;
-    this.author = author;
-    this.year = year;
-    this.pages = pages;
-    this.hasRead = hasRead;
-    this.UUID = crypto.randomUUID();
-
-}
 
 // Add book to library function
 function addBookToLibrary(bookList) {
@@ -103,6 +108,7 @@ confirmBtn.addEventListener('click', (event) => {
     dialog.close();
 })
 
+//Initialize display book
 displayBook(myLibrary);
 
 // function to get book obj index and dom element by getting their uuid
@@ -133,11 +139,6 @@ cards.addEventListener('click', (e) => {
     };
 
 });
-
-// Book prototype change status function to toggle reading status
-Book.prototype.changeStatus = function() {
-    this.hasRead = !this.hasRead;
-};
 
 // change reading status for each card
 function changeStatus(e) {

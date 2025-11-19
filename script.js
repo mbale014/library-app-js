@@ -16,21 +16,48 @@ class Book {
     };
 };
 
-// All Book object will be saved in a list
-const myLibrary = [
-  new Book('Animal farm', 'George Orwell', 1945, 141, true),
-  new Book('Bumi', 'Tere Liye', 2014, 440, true),
-  new Book('Filosofi teras', 'Henry Manampiring', 2018, 344, true),
-  new Book('Shōgun saga', 'James Clavell', 1975, 1152, true),
-  new Book('The Poppy war #1-3', 'R.F. Kuang', 2021, NaN, false),
-];
+// Library object class for storing books
+class Library {
+    #bookList = []
 
-// Add book to library function
-function addBookToLibrary(bookList) {
-    for (let item of bookList) {
-        myLibrary.push(item);
+    addBook(item) {
+        if (!(item instanceof Book)) {
+            console.log('Error: Object must be an instance of Book');
+            return;
+        };
+        return this.#bookList.push(item)
     }
-}
+
+    delBook(idx) {
+        return this.#bookList.splice(idx, 1);
+    }
+
+    findIndex(uniqueID) {
+        return this.#bookList.findIndex(item => item.UUID === uniqueID)
+    }
+
+    get bookList() {
+        return [...this.#bookList];
+    }
+};
+
+//Create Library instance
+const myLibrary = new Library();
+
+//Premade books
+const animalFarm = new Book('Animal farm', 'George Orwell', 1945, 141, true);
+const bumi = new Book('Bumi', 'Tere Liye', 2014, 440, true);
+const filosofiTeras = new Book('Filosofi teras', 'Henry Manampiring', 2018, 344, true);
+const shogunSaga = new Book('Shōgun saga', 'James Clavell', 1975, 1152, true);
+const poppyWar = new Book('The Poppy war #1-3', 'R.F. Kuang', 2021, NaN, false);
+
+//Adding premade books to myLibrary instance
+myLibrary.addBook(animalFarm);
+myLibrary.addBook(bumi);
+myLibrary.addBook(filosofiTeras);
+myLibrary.addBook(shogunSaga);
+myLibrary.addBook(poppyWar);
+
 
 const cards = document.querySelector('.cards');
 
@@ -100,8 +127,7 @@ confirmBtn.addEventListener('click', (event) => {
     }
 
     const bookNew = [new Book(titleValue, authorValue, yearValue , pagesValue, hasReadValue)];
-
-    addBookToLibrary(bookNew);
+    myLibrary.addBook(bookNew[0]);
 
     displayBook(bookNew);
     formInsideDialog.reset();
@@ -109,7 +135,7 @@ confirmBtn.addEventListener('click', (event) => {
 })
 
 //Initialize display book
-displayBook(myLibrary);
+displayBook(myLibrary.bookList);
 
 // function to get book obj index and dom element by getting their uuid
 function getBookDomAndObj(e) {
@@ -117,7 +143,7 @@ function getBookDomAndObj(e) {
     if (!cardElement) return;
 
     const cardUUID = cardElement.dataset.uuid;
-    const objBookIdx = myLibrary.findIndex(item => item.UUID === cardUUID);
+    const objBookIdx = myLibrary.findIndex(cardUUID);
     return [cardElement, objBookIdx];
 }
 
@@ -131,7 +157,7 @@ cards.addEventListener('click', (e) => {
     
         // remove from array myLibrary
         if (objBookIdx !== -1) {
-            myLibrary.splice(objBookIdx, 1)
+            myLibrary.delBook(objBookIdx)
         }
 
         // remove from dom
@@ -144,13 +170,14 @@ cards.addEventListener('click', (e) => {
 function changeStatus(e) {
     if (!e.target.classList.contains('status-toggle-btn')) return;
 
+    const books = myLibrary.bookList;
    const [cardElement, objBookIdx] = getBookDomAndObj(e);
 
    if (objBookIdx !== -1) {
-    myLibrary[objBookIdx].changeStatus();
+    books[objBookIdx].changeStatus();
    }
 
-   if (myLibrary[objBookIdx].hasRead === true) {
+   if (books[objBookIdx].hasRead === true) {
     cardElement.childNodes[4].innerText = 'Status: Completed';
    } else {
     cardElement.childNodes[4].innerText = 'Status: Reading'

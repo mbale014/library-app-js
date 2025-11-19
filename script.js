@@ -62,8 +62,13 @@ myLibrary.addBook(poppyWar);
 const cards = document.querySelector('.cards');
 
 // function to loop through array books then display on card
-function displayBook(myLib) {
-    myLib.forEach(book => {
+function displayBook() {
+    //Set cards element empty so it wont duplicate items
+    cards.innerHTML = "";
+    
+    const books = myLibrary.bookList;
+
+    books.forEach(book => {
         const card = document.createElement('div');
         const title = document.createElement('h3');
         const author = document.createElement('p');
@@ -126,10 +131,11 @@ confirmBtn.addEventListener('click', (event) => {
         return;
     }
 
-    const bookNew = [new Book(titleValue, authorValue, yearValue , pagesValue, hasReadValue)];
-    myLibrary.addBook(bookNew[0]);
+    //Add inputted books to library
+    const bookNew = new Book(titleValue, authorValue, yearValue , pagesValue, hasReadValue);
+    myLibrary.addBook(bookNew);
 
-    displayBook(bookNew);
+    displayBook();
     formInsideDialog.reset();
     dialog.close();
 })
